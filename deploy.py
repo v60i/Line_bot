@@ -64,22 +64,22 @@ def handle_message(event):
     if "開" in msg:
 		if "電風扇" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan_status=X')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan_status=%27X%27')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="開啟電風扇成功 連線狀況:"+str(r.status)))
 		elif "電燈" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Relay_status=N')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Relay_status=%27N%27')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="開啟電燈成功 連線狀況:"+str(r.status)))
 		else:
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請說明要開啟的物件名稱 可選擇電風扇或電燈"))
     if "關閉" in msg:
 		if "電風扇" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan_status=O')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan_status=%27O%27')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="關閉電風扇成功 連線狀況:"+str(r.status)))
 		elif "電燈" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Relay_status=N')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Relay_status=%27N%27')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="關閉電燈成功 連線狀況:"+str(r.status)))
 		else:
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請說明要關閉的物件名稱 可選擇電風扇或電燈"))
