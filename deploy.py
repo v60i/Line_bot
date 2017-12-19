@@ -30,6 +30,10 @@ NEWLINE = "\n"
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
+
+
+
+
 #被Line Message API呼叫運作
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -55,25 +59,27 @@ def handle_message(event):
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     app.logger.info("user sent to line bot message: " + msg)
     msg = msg.encode('utf-8')
+    if "開關" in msg:
+		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="是要開還是關？"))
     if "開" in msg:
 		if "電風扇" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan=1')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan_status=X')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="開啟電風扇成功 連線狀況:"+str(r.status)))
 		elif "電燈" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan=0')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Relay_status=N')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="開啟電燈成功 連線狀況:"+str(r.status)))
 		else:
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請說明要開啟的物件名稱 可選擇電風扇或電燈"))
     if "關閉" in msg:
 		if "電風扇" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?SW_status=on')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Fan_status=O')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="關閉電風扇成功 連線狀況:"+str(r.status)))
 		elif "電燈" in msg:
 			http = urllib3.PoolManager()
-			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?SW_status=off')
+			r = http.request('GET', 'http://120.105.129.29/appliances/appliances.php?Relay_status=N')
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="關閉電燈成功 連線狀況:"+str(r.status)))
 		else:
 			line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請說明要關閉的物件名稱 可選擇電風扇或電燈"))
