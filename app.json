@@ -1,0 +1,28 @@
+{
+  "name": "Line_bot",
+  "description": "Line_bot",
+  "repository": "https://github.com/v60i/Line_bot",
+  "scripts": {
+  },
+  "env": {
+    "ChannelAccessToken": {
+      "required": true
+    },
+    "ChannelSecret": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
