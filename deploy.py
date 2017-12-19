@@ -59,7 +59,7 @@ def handle_message(event):
     app.logger.info("user sent to line bot message: " + msg)
     msg = msg.encode('utf-8')
     if "開關" in msg:
-		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請問是要開起還是關閉？"))
+		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請問是要開啟還是關閉？"))
     if "開" in msg:
 		if "扇" in msg:
 			http = urllib3.PoolManager()
